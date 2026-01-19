@@ -11,7 +11,7 @@ Le projet se concentre actuellement sur :
 - la logique du plateau
 - la sélection et le déplacement des pièces
 - la visualisation des coups possibles
-- une architecture claire et auditable
+- une architecture claire
 
 ⚠️ **Ce projet est un prototype** :
 - toutes les règles ne sont pas encore implémentées
