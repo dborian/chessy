@@ -78,7 +78,7 @@ def display_piece(data):
             elif data.board[row][col] == "RE":
                 data.fenetre.blit(data.text.black.re,(col*130,row*130))
             elif data.board[row][col] == "RO":
-                data.fenetre.blit(data.text.black.ro,(col*130,row*130))
+                data.fenetre.blit(data.text.black.ro,(col*130 - 35,row*130-70))
             elif data.board[row][col] == "FO":
                 data.fenetre.blit(data.text.black.fo,(col*130,row*130))
             elif data.board[row][col] == "CA":
@@ -92,7 +92,6 @@ def display_piece(data):
 def init_text():
     text = texture()
     text.whitepace = pygame.image.load(resource_path("text/pace/whitepace.png")).convert()
-    text.greypace = pygame.image.load(resource_path("text/pace/greypace.png")).convert()
     text.greenpace = pygame.image.load(resource_path("text/pace/greenpace.png")).convert()
     text.redpace = pygame.image.load(resource_path("text/pace/redpace.png")).convert()
     text.orangepace = pygame.image.load(resource_path("text/pace/orangepace.png")).convert()
@@ -112,7 +111,7 @@ def init_text():
 
 def init():
     data = info()
-    data.fenetre = pygame.display.set_mode((1040, 1040))
+    data.fenetre = pygame.display.set_mode((1025, 1025))
     data.board = [
         ["to","ca","fo","re","ro","fo","ca","to"],
         ["pi","pi","pi","pi","pi","pi","pi","pi"],
@@ -223,8 +222,10 @@ def move_to(data):
 
 def move_pi(data, b):
     if b == 1:
-        data.board2[data.yp+1][data.xp+1] = "0"
-        data.board2[data.yp+1][data.xp-1] = "0"
+        if data.xp != 7 and data.yp != 7:
+            data.board2[data.yp+1][data.xp+1] = "0"
+        if data.xp != 0 and data.yp != 7:
+            data.board2[data.yp+1][data.xp-1] = "0"
         return
     if data.xp != 7 and has_upper(data.board[data.yp+1][data.xp+1]) == True:
         data.board2[data.yp+1][data.xp+1] = "0"
@@ -270,6 +271,7 @@ def is_ok(y, x, data):
     data.xp = xt
     data.yp = yt
     return True
+
 def move_ro(data):
     if (data.yp != 0 and is_ok(data.yp-1, data.xp, data) == True) and (data.board[data.yp-1][data.xp] == "." or has_upper(data.board[data.yp][data.xp]) == True and has_upper(data.board[data.yp - 1][data.xp]) == False or has_upper(data.board[data.yp][data.xp]) == False and has_upper(data.board[data.yp - 1][data.xp]) == True):
         data.board2[data.yp-1][data.xp] = "0"
@@ -399,7 +401,7 @@ def main():
     temp = [-1, -1]
     t = "."
     continuer = True
-    p = 0
+    p = 1
     while continuer :
         display_pace(data)
         display_piece(data)
@@ -436,10 +438,10 @@ def main():
                         t = "."
                         temp[0] = -1
                         temp[1] = -1
-                        if p == 0:
-                            p = 1
-                        else:
-                            p = 0
+                        # if p == 0:
+                        #     p = 1
+                        # else:
+                        #     p = 0
                         clear_board(data)
                 elif event.key == K_LEFT and data.xp != 0:
                     data.xp = data.xp - 1
