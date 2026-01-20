@@ -395,6 +395,7 @@ def ft_invalid(data):
 
 def main():
     pygame.init()
+    pygame.display.set_caption("Chessy")
     data = init()
     temp = [-1, -1]
     t = "."
