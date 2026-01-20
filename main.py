@@ -418,6 +418,12 @@ def main():
                             temp[1] = -1
                             clear_board(data)
                     elif temp[0] != -1:
+                        if data.yp == temp[1] and data.xp == temp[0]:
+                            t = "."
+                            temp[0] = -1
+                            temp[1] = -1
+                            clear_board(data)
+                            continue
                         if data.board2[data.yp][data.xp] != "0":
                             continue
                         if has_upper(t) == False and has_upper(data.board[data.yp][data.xp]) == True:
