@@ -179,7 +179,7 @@ def init():
     text_lines = [
     "Game code licensed under the GNU GPLv3.",
     "Any redistributed version must keep the source code public.",
-
+    "",
     "Chess art by Joszs",
     "Licensed under CC BY 4.0",
     "Source: joszs.itch.io"
