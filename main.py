@@ -111,6 +111,48 @@ def init_text():
     text.black.pi = pygame.transform.scale(text.black.pi, (128, 128))
     return text
 
+def show_start_popup(screen, text_lines):
+    import pygame
+
+    font = pygame.font.Font(None, 28)
+    btn_font = pygame.font.Font(None, 32)
+
+    w, h = screen.get_size()
+    btn_rect = pygame.Rect(0, 0, 160, 55)
+    btn_rect.center = (w // 2, int(h * 0.8))
+
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return False  # quitter le jeu
+            if event.type == pygame.KEYDOWN:
+                if event.key in (pygame.K_RETURN, pygame.K_SPACE, pygame.K_ESCAPE):
+                    running = False
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if btn_rect.collidepoint(event.pos):
+                    running = False
+
+        screen.fill((20, 20, 20))
+
+        # Texte centré
+        y = int(h * 0.2)
+        for line in text_lines:
+            surf = font.render(line, True, (240, 240, 240))
+            rect = surf.get_rect(center=(w // 2, y))
+            screen.blit(surf, rect)
+            y += 34
+
+        # Bouton OK
+        pygame.draw.rect(screen, (200, 200, 200), btn_rect, border_radius=10)
+        ok_surf = btn_font.render("OK", True, (0, 0, 0))
+        ok_rect = ok_surf.get_rect(center=btn_rect.center)
+        screen.blit(ok_surf, ok_rect)
+
+        pygame.display.flip()
+
+    return True
+
 def init():
     data = info()
     data.fenetre = pygame.display.set_mode((1024, 1024))
@@ -134,9 +176,17 @@ def init():
         [".",".",".",".",".",".",".","."],
         [".",".",".",".",".",".",".","."],
     ]
+    text_lines = [
+    "Game code licensed under the GNU GPLv3.",
+    "Any redistributed version must keep the source code public.",
+
+    "Chess art by Joszs",
+    "Licensed under CC BY 4.0",
+    "Source: joszs.itch.io"
+    ]
+    show_start_popup(data.fenetre, text_lines)
     data.text = init_text()
     return data
-
 
 def move_fo(data):
     x = data.xp +1
