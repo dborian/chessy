@@ -5,7 +5,7 @@ Any redistribution must provide the full source code and keep this license.***
 
 ## 🧩 Description
 
-**Chessy** est un **prototype de jeu d’échecs** développé en Python avec **pygame**, pensé comme une base évolutive vers une approche **RPG / expérientielle** des échecs.
+**CHessy** est un **prototype de jeu d’échecs** développé en Python avec **pygame**, pensé comme une base évolutive vers une approche **RPG / expérientielle** des échecs.
 
 Le projet se concentre actuellement sur :
 - la logique du plateau
